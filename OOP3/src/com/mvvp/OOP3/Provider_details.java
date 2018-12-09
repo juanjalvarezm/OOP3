@@ -30,4 +30,20 @@ public class Provider_details {
 				e.printStackTrace();
 			}
 		}//Final Insert Method
+		
+		//Update Method
+		public void update(String column, String value, int id_provider) {
+			Connection connection = Connect.getConnection();
+			if(connection != null) {
+				String query = "UPDATE provider_details SET "+column+"= ? WHERE id_product = ?";
+				try {
+					PreparedStatement prepareStatement = connection.prepareStatement(query);
+					prepareStatement.setString(1, value);
+					prepareStatement.setInt(2,id_provider);
+					prepareStatement.executeUpdate();
+				}catch(SQLException e) {
+					e.printStackTrace();
+				}
+			}
+		}//Final update method
 }

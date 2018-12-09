@@ -33,4 +33,18 @@ public class Devolutions {
 				e.printStackTrace();
 			}
 		}//Final Insert Method
+		
+		//Update Method
+		public void update(String column, String value, int id_devol) {
+			Connection connection = Connect.getConnection();
+			if(connection != null) {
+				String query = "UPDATE devolutions SET "+column+" = "+value+" WHERE id_devol = "+id_devol;
+				try {
+					PreparedStatement prepareStatement = connection.prepareStatement(query);
+					prepareStatement.executeUpdate();
+				}catch(SQLException e) {
+					e.printStackTrace();
+				}
+			}
+		}//Final update method
 }
