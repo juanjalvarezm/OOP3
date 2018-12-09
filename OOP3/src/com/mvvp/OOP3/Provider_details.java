@@ -32,18 +32,39 @@ public class Provider_details {
 		}//Final Insert Method
 		
 		//Update Method
-		public void update(String column, String value, int id_provider) {
+		public void update(String column, String value, int id_detail) {
 			Connection connection = Connect.getConnection();
 			if(connection != null) {
-				String query = "UPDATE provider_details SET "+column+"= ? WHERE id_product = ?";
+				String query = "UPDATE provider_details SET "+column+"= ? WHERE id_detail = ?";
 				try {
 					PreparedStatement prepareStatement = connection.prepareStatement(query);
 					prepareStatement.setString(1, value);
-					prepareStatement.setInt(2,id_provider);
+					prepareStatement.setInt(2,id_detail);
 					prepareStatement.executeUpdate();
 				}catch(SQLException e) {
 					e.printStackTrace();
 				}
 			}
 		}//Final update method
+		
+		//Delete Method
+		public void delete(int id_detail) {
+			Connection connection = Connect.getConnection();
+			if(connection != null) {
+				String query = "DELETE FROM provider_details WHERE id_detail = ?";
+				try {
+					PreparedStatement prepareStatement = connection.prepareStatement(query);
+					prepareStatement.setInt(1,id_detail);
+					prepareStatement.executeUpdate();
+				}catch(SQLException e) {
+					e.printStackTrace();
+				}
+				try {
+					connection.close();
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+		}//Final Delete Method
 }

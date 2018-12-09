@@ -46,6 +46,35 @@ public class Product {
 					}catch(SQLException e) {
 						e.printStackTrace();
 					}
+					try {
+						connection.close();
+					} catch (SQLException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
 				}
 			}//Final update method
+			
+			//Delete Method
+			public void delete(int id_product) {
+				Connection connection = Connect.getConnection();
+				if(connection != null) {
+					String query = "DELETE FROM product WHERE id_product = ?";
+					try {
+						PreparedStatement prepareStatement = connection.prepareStatement(query);
+						prepareStatement.setInt(1,id_product);
+						prepareStatement.executeUpdate();
+					}catch(SQLException e) {
+						e.printStackTrace();
+					}
+					try {
+						connection.close();
+					} catch (SQLException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+				}
+			}//Final Delete Method
+			
+			
 }

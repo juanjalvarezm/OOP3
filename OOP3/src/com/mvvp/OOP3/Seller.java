@@ -46,4 +46,25 @@ public class Seller {
 				}
 			}
 		}//Final update method
+		
+		//Delete Method
+		public void delete(int id_seller) {
+			Connection connection = Connect.getConnection();
+			if(connection != null) {
+				String query = "DELETE FROM seller WHERE id_seller = ?";
+				try {
+					PreparedStatement prepareStatement = connection.prepareStatement(query);
+					prepareStatement.setInt(1,id_seller);
+					prepareStatement.executeUpdate();
+				}catch(SQLException e) {
+					e.printStackTrace();
+				}
+				try {
+					connection.close();
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+		}//Final Delete Method
 }

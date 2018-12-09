@@ -50,4 +50,25 @@ public class Bill_details {
 				}
 			}
 		}//Final update method
+		
+		//Delete Method
+		public void delete(int id_detail) {
+			Connection connection = Connect.getConnection();
+			if(connection != null) {
+				String query = "DELETE FROM bill_details WHERE id_detail = ?";
+				try {
+					PreparedStatement prepareStatement = connection.prepareStatement(query);
+					prepareStatement.setInt(1,id_detail);
+					prepareStatement.executeUpdate();
+				}catch(SQLException e) {
+					e.printStackTrace();
+				}
+				try {
+					connection.close();
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+		}//Final Delete Method
 }
