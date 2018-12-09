@@ -1,13 +1,37 @@
 package com.mvvp.OOP3;
 
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
+
 public class Provider {
-	int id_provider; //PK
-	String name; 
-	String address;
+	//Insert Method
+	public static void insert(int id_provider, String name, String address) {
+		Connection connection = Connect.getConnection();
+		if(connection != null ) {
+
+			String query ="INSERT INTO provider(id_product, name, address)  VALUES (?,?, ?)";
 	
-	public static void create(String name, String address) {
-		String create = "INSERT INTO proveedor VALUES (nextval(\'proveedor\')"+
-	", \'"+name+"\', \'"+address+"\' )";
-		Statement.Insert(create);
-	}
+			try {
+				PreparedStatement prepareStatement = connection.prepareStatement(query);
+				prepareStatement.setInt(1, id_provider);
+				prepareStatement.setString(2, name);
+				prepareStatement.setString(3,address);
+				prepareStatement.executeUpdate();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			try {
+				connection.close();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+	}//Final Insert Method
+	
+	
+	
+	
 }

@@ -9,5 +9,7 @@
 	<classpathentry kind="lib" path="C:/Users/juanj/Documents/PowerArchitect/jdbc/sqljdbc4-2.0.jar"/>
 	<classpathentry kind="lib" path="C:/Users/juanj/Documents/PowerArchitect/jdbc/sqljdbc4-3.0.jar"/>
 	<classpathentry kind="lib" path="C:/Users/juanj/Documents/PowerArchitect/jdbc/sqlserver_2005.jar"/>
+	<classpathentry kind="lib" path="miglayout15-swing.jar" sourcepath="miglayout-src.zip"/>
+	<classpathentry kind="lib" path="jgoodies-forms-1.8.0.jar" sourcepath="jgoodies-forms-1.8.0-sources.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

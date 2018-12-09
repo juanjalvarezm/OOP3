@@ -12,17 +12,19 @@ public class Main {
 		int id_product;
 		Product product = new Product();
 		Scanner scan = new  Scanner(System.in); 
+		System.out.println("Numero de producto: ");
+		id_product = scan.nextInt();
 		System.out.println("Nombre del producto: ");
 		name_product = scan.nextLine();
 		System.out.println("Precio del producto: ");
 		price_product = scan.nextInt();
 		System.out.println("Descripcion del producto: ");
-		description_product = scan.nextLine();
+		description_product = scan.next();
 		System.out.println("Stock: ");
 		stock_product = scan.nextInt();
 		System.out.println("Proveedor id: ");
 		id_provider = scan.nextInt();
-		product.insert(1,name_product,  stock_product, description_product,price_product, id_provider);
+		product.insert(id_product,name_product,  stock_product, description_product,price_product, id_provider);
 		
 		
 		
