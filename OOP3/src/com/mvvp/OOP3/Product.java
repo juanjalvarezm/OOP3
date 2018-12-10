@@ -76,5 +76,48 @@ public class Product {
 				}
 			}//Final Delete Method
 			
-			
+			//Read Method 
+			public void read() {
+				Connection connection  = Connect.getConnection();
+				if(connection != null) {
+					Statement stmt = null;
+					String query = "SELECT * FROM product_view";
+					try {
+						stmt = connection.createStatement();
+						ResultSet rs  = stmt.executeQuery(query);
+						while(rs.next()) {
+							
+							Integer productid = rs.getInt("productid");
+							String nameproduct =rs.getString("nameproduct");
+							String descripproduct = rs.getString("descripproduct");
+							Integer stock = rs.getInt("stock");
+							Integer price = rs.getInt("price");
+							String provider = rs.getString("provider");
+							System.out.println("ID: "+productid+"|"
+												+" Product Name = "+nameproduct+"|"
+												+" Product Description = "+descripproduct+"|"
+												+" Stock = "+stock+"|"
+												+" Price = "+price+"|"
+												+" Provider = "+provider+"\n");
+						}
+					}catch(SQLException e) {
+						System.out.println(e);
+					}finally {
+						if(stmt != null) {
+							try {
+								stmt.close();
+							} catch (SQLException e) {
+								// TODO Auto-generated catch block
+								e.printStackTrace();
+							}
+						}
+					}
+					try {
+						connection.close();
+					}catch(SQLException e) {
+						e.printStackTrace();
+					}
+					
+				}
+			}//Final Read Method
 }
