@@ -27,7 +27,6 @@ public class Main {
 		product.insert(id_product,name_product,  stock_product, description_product,price_product, id_provider);*/
 		
 		
-		
 	}
 
 }

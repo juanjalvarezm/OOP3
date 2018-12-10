@@ -2,7 +2,9 @@ package com.mvvp.OOP3;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 
 public class Seller {
 	//Insert Method
@@ -67,4 +69,43 @@ public class Seller {
 				}
 			}
 		}//Final Delete Method
+		
+		//Read Method 
+		public void read() {
+			Connection connection  = Connect.getConnection();
+			if(connection != null) {
+				Statement stmt = null;
+				String query = "SELECT * FROM seller";
+				try {
+					stmt = connection.createStatement();
+					ResultSet rs  = stmt.executeQuery(query);
+					while(rs.next()) {
+						
+						Integer id_seller = rs.getInt("id_seller");
+						String name =rs.getString("name");
+						Integer turn = rs.getInt("turn");
+						System.out.println("ID: "+id_seller+"|"
+											+" Client Name = "+name+"|"
+											+" Address = "+turn+"\n");
+					}
+				}catch(SQLException e) {
+					System.out.println(e);
+				}finally {
+					if(stmt != null) {
+						try {
+							stmt.close();
+						} catch (SQLException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						}
+					}
+				}
+				try {
+					connection.close();
+				}catch(SQLException e) {
+					e.printStackTrace();
+				}
+				
+			}
+		}//Final Read Method
 }

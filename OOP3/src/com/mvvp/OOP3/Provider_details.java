@@ -2,7 +2,9 @@ package com.mvvp.OOP3;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 
 public class Provider_details {
 	//Insert Method
@@ -67,4 +69,47 @@ public class Provider_details {
 				}
 			}
 		}//Final Delete Method
+		
+		//Read Method 
+				public void read() {
+					Connection connection  = Connect.getConnection();
+					if(connection != null) {
+						Statement stmt = null;
+						String query = "SELECT * FROM provider_details_view";
+						try {
+							stmt = connection.createStatement();
+							ResultSet rs  = stmt.executeQuery(query);
+							while(rs.next()) {
+								
+								Integer detailid = rs.getInt("detailid");
+								Integer providerid =rs.getInt("providerid");
+								String providername = rs.getString("providername");
+								Integer productid = rs.getInt("productid");
+								String productname = rs.getString("productname");
+								System.out.println("ID: "+detailid+"|"
+													+" Provider ID = "+providerid+"|"
+													+" Provider Name = "+providername+"|"
+													+" Product ID = "+productid+"|"
+													+" Product Name = "+productname+"\n");
+							}
+						}catch(SQLException e) {
+							System.out.println(e);
+						}finally {
+							if(stmt != null) {
+								try {
+									stmt.close();
+								} catch (SQLException e) {
+									// TODO Auto-generated catch block
+									e.printStackTrace();
+								}
+							}
+						}
+						try {
+							connection.close();
+						}catch(SQLException e) {
+							e.printStackTrace();
+						}
+						
+					}
+				}//Final Read Method
 }

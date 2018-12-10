@@ -2,7 +2,9 @@ package com.mvvp.OOP3;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 
 public class Provider {
 	//Insert Method
@@ -68,6 +70,43 @@ public class Provider {
 		}
 	}//Final Delete Method
 	
-	
+	//Read Method 
+			public void read() {
+				Connection connection  = Connect.getConnection();
+				if(connection != null) {
+					Statement stmt = null;
+					String query = "SELECT * FROM provider";
+					try {
+						stmt = connection.createStatement();
+						ResultSet rs  = stmt.executeQuery(query);
+						while(rs.next()) {
+							
+							Integer id_provider = rs.getInt("id_provider");
+							String name =rs.getString("name");
+							String address = rs.getString("address");
+							System.out.println("ID: "+id_provider+"|"
+												+" Client Name = "+name+"|"
+												+" Address = "+address+"\n");
+						}
+					}catch(SQLException e) {
+						System.out.println(e);
+					}finally {
+						if(stmt != null) {
+							try {
+								stmt.close();
+							} catch (SQLException e) {
+								// TODO Auto-generated catch block
+								e.printStackTrace();
+							}
+						}
+					}
+					try {
+						connection.close();
+					}catch(SQLException e) {
+						e.printStackTrace();
+					}
+					
+				}
+			}//Final Read Method
 	
 }

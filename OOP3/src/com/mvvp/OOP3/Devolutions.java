@@ -2,7 +2,9 @@ package com.mvvp.OOP3;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 
 public class Devolutions {
 	//Insert Method
@@ -68,4 +70,49 @@ public class Devolutions {
 				}
 			}
 		}//Final Delete Method
+		
+		//Read Method 
+				public void read() {
+					Connection connection  = Connect.getConnection();
+					if(connection != null) {
+						Statement stmt = null;
+						String query = "SELECT * FROM devolutions_view";
+						try {
+							stmt = connection.createStatement();
+							ResultSet rs  = stmt.executeQuery(query);
+							while(rs.next()) {
+								
+								Integer id_devol = rs.getInt("devolid");
+								Integer billid =rs.getInt("billid");
+								String product = rs.getString("product");
+								Integer quantity = rs.getInt("quantity");
+								String client = rs.getString("client");
+								Integer clientid = rs.getInt("clientid");
+								System.out.println("ID: "+id_devol+"|"
+													+" Bill ID = "+billid+"|"
+													+" Product Name = "+product+"|"
+													+" Quantity = "+quantity+"|"
+													+" Client Name = "+client
+													+" Client ID = "+clientid+"\n");
+							}
+						}catch(SQLException e) {
+							System.out.println(e);
+						}finally {
+							if(stmt != null) {
+								try {
+									stmt.close();
+								} catch (SQLException e) {
+									// TODO Auto-generated catch block
+									e.printStackTrace();
+								}
+							}
+						}
+						try {
+							connection.close();
+						}catch(SQLException e) {
+							e.printStackTrace();
+						}
+						
+					}
+				}//Final Read Method
 }
